@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const routes= require('./routes/routes');
 const sassMiddleware= require('node-sass-middleware');
+const cors= require('cors')
 
 //* Aplicación
 const app = express();
@@ -20,6 +21,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname,"public"),{etag:true,maxAge:'30 days',redirect:true}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+//*CORS
+app.use(cors());
 //* Configuración de rutas
 app.use(routes);
 
