@@ -4,7 +4,7 @@ require('dotenv').config();
 class CloudStorageController {
     constructor() {
         this.storage = new Storage({keyFilename:process.env.SERVICE_ACCOUNT_GCP, projectId: process.env.PROJECT_ID});
-        this.bucket= this.storage.bucket('videos_asaltos')
+        this.bucket= this.storage.bucket('videos_asaltos2')
     }
 
     uploadFile=async (req)=>{
