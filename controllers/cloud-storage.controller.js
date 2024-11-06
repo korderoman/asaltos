@@ -36,7 +36,7 @@ class CloudStorageController {
             const blobStream = blob.createWriteStream({resumable:true,contentType: req.file.mimetype});
             blobStream.on('finish',()=>{
                 console.log("finalizó la subida")
-                const urlFile=`https://storage.googleapis.com/${'videos_asaltos2'}/${req.file.originalname}`;
+                const urlFile=`https://storage.googleapis.com/${'videos_asaltos3'}/${req.file.originalname}`;
                 //console.log("url",urlFile)*/
                 //const urlFile=await this.generateSignedUrl(blob)
                 const response={status:"success",message:`Se subió el archivo ${req.file.originalname} a gcp`, extras:{url: urlFile}};
@@ -73,7 +73,7 @@ class CloudStorageController {
                     cacheControl: "public, max-age=31536000",
                 }
             });
-            const urlFile=`https://storage.googleapis.com/${'videos_asaltos2'}/${id}.mp4`;
+            const urlFile=`https://storage.googleapis.com/${'videos_asaltos3'}/${id}.mp4`;
             return {status:"success",message:`Se subió el archivo ${id}.mp4 a gcp`, extras:{url: urlFile}};
 
 
@@ -89,7 +89,7 @@ class CloudStorageController {
         const blobStream = blob.createWriteStream({resumable:true,contentType: req.file.mimetype});
         blobStream.on('finish',()=>{
             console.log("finalizó la subida");
-            const urlFile=`https://storage.googleapis.com/${'videos_asaltos2'}/${req.file.originalname}`;
+            const urlFile=`https://storage.googleapis.com/${'videos_asaltos3'}/${req.file.originalname}`;
             //console.log("url",urlFile)*/
             //const urlFile=await this.generateSignedUrl(blob)
             response={status:"success",message:`Se subió el archivo ${req.file.originalname} a gcp`, extras:{url: urlFile}}
