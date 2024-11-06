@@ -1,4 +1,7 @@
 const uploader=require("./multer.controller")
+const fs=require("fs");
+const path=require("path");
+const youtubedl = require("youtube-dl-exec");
 class OnPremiseController {
     constructor() {
         this.uploadOnPremise = uploader.uploadOnPremise
@@ -15,13 +18,24 @@ class OnPremiseController {
         })
     }
 
-    uploaderOnPremise=async (req,res)=>{
+    uploaderOnPremiseFromVideo=async (req, res)=>{
         try{
              return await this.uploadToOnPremise(req,res)
         }catch (e) {
             console.error(e)
         }
     }
+    uploaderOnPremiseFromUrl=async (url)=>{
+        const pathToSplit="https://www.youtube.com/watch?v="
+        const id=url.split(pathToSplit)[1]
+        await youtubedl(url, {
+            output: path.join(__dirname,`../data/${id}.mp4`),
+            format: "mp4", // Especifica el formato de salida (puede variar según disponibilidad)
+        });
+        return id;
+    }
+
+
 }
 
 module.exports= OnPremiseController;

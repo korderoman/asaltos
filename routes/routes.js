@@ -9,16 +9,21 @@ routes.get("/", async (req,res)=>{
     res.render('index');
 })
 
-routes.post("/upload",uploader.uploaderGcp, async (req,res)=>{
-   console.log("req",req.file)
-    await gcpStorage.uploadFile(req)
-    res.status(200).send({status:"success"});
+routes.post("/upload/v1", async (req,res)=>{
+    await onPremiseStorage.uploaderOnPremiseFromVideo(req,res)
+    res.status(200).send({status:"success"})
 })
 
-routes.post("/uploadv2",async (req,res)=>{
-    const response = await onPremiseStorage.uploaderOnPremise(req,res)
-    console.log("req",response)
-    res.status(200).send({status:"success"});
+routes.post("/upload/v2", uploader.uploaderGcp,async (req,res)=>{
+    const  response =await gcpStorage.uploadFile(req)
+    res.status(200).send(response);
+})
+
+routes.post("/upload/v3", async (req,res)=>{
+    const id=await onPremiseStorage.uploaderOnPremiseFromUrl(req.body.url)
+    const response=await gcpStorage.uploadFileFromLocal(id);
+    res.status(200).send(response)
+
 })
 
 module.exports = routes;
