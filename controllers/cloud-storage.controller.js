@@ -78,7 +78,9 @@ class CloudStorageController {
 
 
         }catch (e) {
-            console.error(e)
+            console.error(e);
+            return {status:"error",message:`Hubo un error al subir el archivo ${id}.mp4 a gcp`, extras:{url: null}};
+
         }
 
     }
