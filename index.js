@@ -26,6 +26,6 @@ app.use(cors());
 //* Configuración de rutas
 app.use(routes);
 
-app.listen(process.env.PORT || 443, async () => {
-    console.log(`Servidor iniciado en  ${process.env.PORT || 443}`);
+app.listen(process.env.PORT || 3000, async () => {
+    console.log(`Servidor iniciado en  ${process.env.PORT || 3000}`);
 });
